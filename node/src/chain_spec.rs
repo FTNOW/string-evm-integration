@@ -1,7 +1,7 @@
 use sp_core::{Pair, Public, sr25519};
 use template_runtime::{
 	AccountId, AuraConfig, BalancesConfig, EVMConfig, EthereumConfig, GenesisConfig, GrandpaConfig,
-	SudoConfig, SystemConfig, WASM_BINARY, Signature
+	SudoConfig, SystemConfig, WASM_BINARY, Signature, ContractsConfig
 };
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
 use sp_finality_grandpa::AuthorityId as GrandpaId;
@@ -132,7 +132,7 @@ fn testnet_genesis(
 	initial_authorities: Vec<(AuraId, GrandpaId)>,
 	root_key: AccountId,
 	endowed_accounts: Vec<AccountId>,
-	_enable_println: bool,
+	enable_println: bool,
 ) -> GenesisConfig {
 	GenesisConfig {
 		frame_system: SystemConfig {
@@ -158,5 +158,11 @@ fn testnet_genesis(
 			accounts: BTreeMap::new(),
 		},
 		pallet_ethereum: EthereumConfig {},
+		pallet_contracts: ContractsConfig {
+			current_schedule: pallet_contracts::Schedule {
+				enable_println,
+				..Default::default()
+			},
+		},
 	}
 }

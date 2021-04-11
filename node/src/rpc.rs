@@ -5,7 +5,7 @@ use std::sync::Arc;
 use std::collections::BTreeMap;
 use fc_rpc_core::types::{PendingTransactions, FilterPool};
 use sc_consensus_manual_seal::rpc::{ManualSeal, ManualSealApi};
-use template_runtime::{Hash, AccountId, Index, opaque::Block, Balance};
+use template_runtime::{Hash, AccountId, Index, opaque::Block, Balance, BlockNumber};
 use sp_api::ProvideRuntimeApi;
 use sp_transaction_pool::TransactionPool;
 use sp_blockchain::{Error as BlockChainError, HeaderMetadata, HeaderBackend};
@@ -21,6 +21,7 @@ use sc_network::NetworkService;
 use jsonrpc_pubsub::manager::SubscriptionManager;
 use pallet_ethereum::EthereumStorageSchema;
 use fc_rpc::{StorageOverride, SchemaV1Override};
+use pallet_contracts_rpc::{Contracts, ContractsApi};
 
 /// Light client extra dependencies.
 pub struct LightDeps<C, F, P> {
@@ -70,6 +71,7 @@ pub fn create_full<C, P, BE>(
 	C: HeaderBackend<Block> + HeaderMetadata<Block, Error=BlockChainError>,
 	C: Send + Sync + 'static,
 	C::Api: substrate_frame_rpc_system::AccountNonceApi<Block, AccountId, Index>,
+	C::Api: pallet_contracts_rpc::ContractsRuntimeApi<Block, AccountId, Balance, BlockNumber>,
 	C::Api: BlockBuilder<Block>,
 	C::Api: pallet_transaction_payment_rpc::TransactionPaymentRuntimeApi<Block, Balance>,
 	C::Api: fp_rpc::EthereumRuntimeRPCApi<Block>,
@@ -149,7 +151,9 @@ pub fn create_full<C, P, BE>(
 			client.clone(),
 		))
 	);
-
+	io.extend_with(
+		ContractsApi::to_delegate(Contracts::new(client.clone()))
+	);
 	io.extend_with(
 		EthPubSubApiServer::to_delegate(EthPubSubApi::new(
 			pool.clone(),

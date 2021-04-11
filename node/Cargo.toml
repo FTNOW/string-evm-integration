@@ -41,6 +41,8 @@ sc-consensus = { git = "https://github.com/paritytech/substrate.git", branch = "
 sp-timestamp = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 pallet-evm = { git = "https://github.com/paritytech/frontier.git" }
 pallet-ethereum = { git = "https://github.com/paritytech/frontier.git" }
+pallet-contracts = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
+pallet-contracts-rpc = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 sc-finality-grandpa = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 sp-finality-grandpa = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 sc-client-api = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
