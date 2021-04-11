@@ -50,6 +50,8 @@ pallet-contracts-primitives = { version = "3.0.0-dev", default-features = false,
 pallet-contracts-rpc-runtime-api = { version = "3.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 fp-rpc = { default-features = false, git = "https://github.com/paritytech/frontier.git" }
 orml-nft = { default-features = false, version = '0.4.0', path = "../pallets/nft" }
+pallet-chiba = { default-features = false, version = '0.4.0', path = "../pallets/chiba" }
+pallet-atomic-swap = { version = "3.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 
 [build-dependencies]
 substrate-wasm-builder = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
@@ -67,7 +69,8 @@ std = [
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
 	"fp-rpc/std",
-
+	"pallet-chiba/std",
+	"pallet-atomic-swap/std",
 	"pallet-ethereum/std",
 	"pallet-evm/std",
 	"pallet-aura/std",

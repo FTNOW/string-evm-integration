@@ -390,8 +390,23 @@ impl pallet_contracts::Config for Runtime {
 impl orml_nft::Config for Runtime {
 	type ClassId = u32;
 	type TokenId = u64;
-	type ClassData = ();
-	type TokenData = ();
+	type ClassData = pallet_chiba::ClassData;
+	type TokenData = pallet_chiba::TokenData;
+}
+
+impl pallet_chiba::Config for Runtime {
+	type Event = Event;
+	type Currency = Balances;
+}
+
+parameter_types! {
+    pub const ProofLimit: u32 = 10_000;
+}
+
+impl pallet_atomic_swap::Config for Runtime {
+	type Event = Event;
+	type SwapAction = pallet_chiba::ChibaSwapAction<Runtime>;
+	type ProofLimit = ProofLimit;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -414,6 +429,8 @@ construct_runtime!(
 		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
 		Contracts: pallet_contracts::{Module, Call, Config<T>, Storage, Event<T>},
 		OrmlNFT: orml_nft::{Module, Storage, Config<T>},
+		Chiba: pallet_chiba::{Module, Call, Storage, Event<T>},
+		AtomicSwap: pallet_atomic_swap::{Module, Call, Storage, Event<T>},
 	}
 );
 
