@@ -387,6 +387,13 @@ impl pallet_contracts::Config for Runtime {
 	type MaxCodeSize = MaxCodeSize;
 }
 
+impl orml_nft::Config for Runtime {
+	type ClassId = u32;
+	type TokenId = u64;
+	type ClassData = ();
+	type TokenData = ();
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -406,6 +413,7 @@ construct_runtime!(
 		EVM: pallet_evm::{Module, Config, Call, Storage, Event<T>},
 		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
 		Contracts: pallet_contracts::{Module, Call, Config<T>, Storage, Event<T>},
+		OrmlNFT: orml_nft::{Module, Storage, Config<T>},
 	}
 );
 

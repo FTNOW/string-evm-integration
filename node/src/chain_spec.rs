@@ -1,7 +1,7 @@
 use sp_core::{Pair, Public, sr25519};
 use template_runtime::{
 	AccountId, AuraConfig, BalancesConfig, EVMConfig, EthereumConfig, GenesisConfig, GrandpaConfig,
-	SudoConfig, SystemConfig, WASM_BINARY, Signature, ContractsConfig
+	SudoConfig, SystemConfig, WASM_BINARY, Signature, ContractsConfig, OrmlNFTConfig
 };
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
 use sp_finality_grandpa::AuthorityId as GrandpaId;
@@ -164,5 +164,6 @@ fn testnet_genesis(
 				..Default::default()
 			},
 		},
+		orml_nft: OrmlNFTConfig { tokens: vec![] },
 	}
 }
