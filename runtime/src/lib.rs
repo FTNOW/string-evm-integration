@@ -339,7 +339,6 @@ impl pallet_ethereum::Config for Runtime {
 impl pallet_template::Config for Runtime {
 	type Event = Event;
 }
-
 parameter_types! {
     pub const TombstoneDeposit: Balance = deposit(
         1,
@@ -702,6 +701,7 @@ impl_runtime_apis! {
 			None
 		}
 	}
+
 	impl pallet_contracts_rpc_runtime_api::ContractsApi<Block, AccountId, Balance, BlockNumber>
     for Runtime
     {

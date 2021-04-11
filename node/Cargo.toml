@@ -1,6 +1,6 @@
 [package]
 name = "frontier-template-node"
-version = "3.0.0-dev"
+version = "3.0.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate Node template"
 edition = "2018"
@@ -59,6 +59,8 @@ fp-rpc = { git = "https://github.com/paritytech/frontier.git" }
 fc-rpc-core = { git = "https://github.com/paritytech/frontier.git" }
 fc-db = { git = "https://github.com/paritytech/frontier.git" }
 fc-mapping-sync = { git = "https://github.com/paritytech/frontier.git" }
+pallet-contracts = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
+pallet-contracts-rpc = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
 
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate.git", branch = "frontier" }
