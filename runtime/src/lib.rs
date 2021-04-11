@@ -49,6 +49,7 @@ use pallet_evm::{
 use fp_rpc::TransactionStatus;
 use pallet_transaction_payment::CurrencyAdapter;
 use pallet_contracts::weights::WeightInfo;
+
 /// Type of block number.
 pub type BlockNumber = u32;
 
@@ -385,6 +386,7 @@ impl pallet_contracts::Config for Runtime {
 	type DeletionWeightLimit = DeletionWeightLimit;
 	type MaxCodeSize = MaxCodeSize;
 }
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where

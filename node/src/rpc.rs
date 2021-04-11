@@ -151,7 +151,7 @@ pub fn create_full<C, P, BE>(
 			client.clone(),
 		))
 	);
-	// Contracts RPC API extension
+
 	io.extend_with(
 		ContractsApi::to_delegate(Contracts::new(client.clone()))
 	);
